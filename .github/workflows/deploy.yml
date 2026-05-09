@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Re-deploy on every push to main or master (works regardless of default branch name)
+  push:
+    branches: [main, master]
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+# Prevent concurrent deploys overwriting each other
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        # VITE_BASE matches the GitHub Pages project URL.
+        # Change to "/" if you ever serve from a custom domain root.
+        run: npm run build
+        env:
+          VITE_BASE: /Tech-Productions/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

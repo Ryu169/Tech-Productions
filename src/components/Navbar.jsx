@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { navLinks, siteConfig } from '../data/siteConfig.js';
+import { asset } from '../hooks/asset.js';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +53,7 @@ export default function Navbar() {
           className="flex items-center gap-2.5 group"
         >
           <img
-            src="/logo-tp.png"
+            src={asset('logo-tp.png')}
             alt={`${siteConfig.brand.name} logo`}
             className="h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-110 drop-shadow"
           />

@@ -21,9 +21,14 @@ function RedirectIfAuthed({ children }) {
   return children;
 }
 
+// Router basename matches Vite's base — empty string in dev (BASE_URL = "/"),
+// "/Tech-Productions" on GitHub Pages. Trailing slash must be stripped because
+// react-router-dom v6 forbids a basename ending in "/".
+const ROUTER_BASENAME = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={ROUTER_BASENAME}>
       <AdminProvider>
         <Routes>
           {/* Public site */}

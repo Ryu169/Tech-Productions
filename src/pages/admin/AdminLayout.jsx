@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useAdmin } from '../../hooks/AdminContext.jsx';
 import { siteConfig } from '../../data/siteConfig.js';
+import { asset } from '../../hooks/asset.js';
 
 const items = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -40,7 +41,7 @@ export default function AdminLayout() {
         }`}
       >
         <div className="px-6 h-20 flex items-center gap-3 border-b border-brand-100">
-          <img src="/logo-tp.png" alt="logo" className="h-9 w-auto" />
+          <img src={asset('logo-tp.png')} alt="logo" className="h-9 w-auto" />
           <div className="min-w-0">
             <div className="text-[10px] font-bold uppercase tracking-widest text-accent">
               Admin
@@ -111,7 +112,7 @@ export default function AdminLayout() {
             <Menu size={20} />
           </button>
           <div className="flex items-center gap-2">
-            <img src="/logo-tp.png" alt="logo" className="h-7 w-auto" />
+            <img src={asset('logo-tp.png')} alt="logo" className="h-7 w-auto" />
             <span className="text-sm font-semibold text-brand-950">
               Admin Panel
             </span>

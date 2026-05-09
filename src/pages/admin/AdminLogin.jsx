@@ -3,6 +3,7 @@ import { Lock, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAdmin } from '../../hooks/AdminContext.jsx';
 import { siteConfig } from '../../data/siteConfig.js';
+import { asset } from '../../hooks/asset.js';
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
@@ -42,7 +43,7 @@ export default function AdminLogin() {
 
         <div className="bg-white rounded-2xl shadow-2xl border border-white/10 p-8 sm:p-10">
           <div className="flex items-center gap-3 mb-6">
-            <img src="/logo-tp.png" alt="logo" className="h-10 w-auto" />
+            <img src={asset('logo-tp.png')} alt="logo" className="h-10 w-auto" />
             <div>
               <div className="text-xs font-semibold text-accent uppercase tracking-widest">
                 Admin Panel
