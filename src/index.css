@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-white text-brand-950 antialiased;
+  }
+
+  *::selection {
+    @apply bg-accent/30 text-brand-950;
+  }
+}
+
+@layer components {
+  .container-app {
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 font-semibold text-white shadow-lg shadow-accent/30 transition-all duration-300 hover:bg-accent-dark hover:scale-105 hover:shadow-xl active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-7 py-3.5 font-semibold text-white border border-white/30 transition-all duration-300 hover:bg-white/20 hover:scale-105;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-medium text-brand-700 transition-colors hover:bg-brand-100;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-5xl font-extrabold tracking-tight text-brand-950;
+  }
+
+  .section-subtitle {
+    @apply mt-4 text-base md:text-lg text-brand-700 max-w-2xl;
+  }
+
+  .card-base {
+    @apply bg-white rounded-2xl border border-brand-100 shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-accent/40;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-brand-200 bg-white px-4 py-2.5 text-sm text-brand-950 placeholder:text-brand-400 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-brand-800 mb-1.5;
+  }
+}
+
+/* Hero fixed background — only on devices that support it well */
+.hero-bg {
+  background-image:
+    linear-gradient(180deg, rgba(8, 12, 20, 0.55) 0%, rgba(8, 12, 20, 0.85) 100%),
+    url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* Hide scrollbar completely on the page level — eliminates the white gutter
+   strip that macOS "Always show scrollbars" preference creates on dark
+   sections. Page is still fully scrollable via wheel, trackpad, keyboard,
+   and touch. Modern design pattern (used by Apple.com, Linear, etc). */
+html {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE / legacy Edge */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none;                  /* Chrome / Safari / WebKit */
+}
+
+/* …but inside scrollable containers (admin tables, lightbox thumbnails,
+   modal bodies), keep a subtle visible scrollbar so users know they can
+   scroll. Opt in via the `.has-scrollbar` utility class. */
+.has-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 37, 55, 0.18) transparent;
+}
+.has-scrollbar::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+  display: block !important;
+}
+.has-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(20, 37, 55, 0.18);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s ease;
+}
+.has-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(20, 37, 55, 0.4);
+}
+
+/* Dark variant for thumbnail strips inside the lightbox */
+.scrollbar-on-dark::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+  display: block !important;
+}
+.scrollbar-on-dark::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.scrollbar-on-dark::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.scrollbar-on-dark::-webkit-scrollbar-track {
+  background: transparent;
+}
