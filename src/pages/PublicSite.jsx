@@ -6,6 +6,7 @@ import About from '../components/About.jsx';
 import Contact from '../components/Contact.jsx';
 import Footer from '../components/Footer.jsx';
 import WhatsAppFab from '../components/WhatsAppFab.jsx';
+import Team from '../components/Team.jsx';
 
 export default function PublicSite() {
   return (
@@ -16,6 +17,7 @@ export default function PublicSite() {
         <Catalog />
         <Projects />
         <About />
+        <Team />
         <Contact />
       </main>
       <Footer />

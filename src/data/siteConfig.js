@@ -30,7 +30,28 @@ export const navLinks = [
   { id: 'catalog', label: 'Catalog' },
   { id: 'projects', label: 'Project' },
   { id: 'about', label: 'About' },
+  { id: 'team', label: 'Team' },
   { id: 'contact', label: 'Contact' },
+];
+
+// Seed data for Team Members
+export const teamMembers = [
+  {
+    id: 'member-1',
+    name: 'Nama Anggota Pertama',
+    role: 'Co-Founder & Lead Developer',
+    education: 'S1 Teknik Informatika, Universitas Contoh',
+    experience: '5+ tahun pengalaman dalam pengembangan Full-Stack Web dan AI System. Mengkhususkan diri pada arsitektur scalable dan performa tinggi.',
+    image: 'https://ui-avatars.com/api/?name=Anggota+Pertama&background=0D8ABC&color=fff&size=256'
+  },
+  {
+    id: 'member-2',
+    name: 'Nama Anggota Kedua',
+    role: 'Co-Founder & UI/UX Designer',
+    education: 'S1 Sistem Informasi, Universitas Contoh',
+    experience: '4+ tahun pengalaman dalam mendesain antarmuka pengguna (UI/UX) untuk berbagai produk digital yang intuitif dan berpusat pada pengguna.',
+    image: 'https://ui-avatars.com/api/?name=Anggota+Kedua&background=E11D48&color=fff&size=256'
+  }
 ];
 
 // Seed data — used the first time the app loads when localStorage is empty.
