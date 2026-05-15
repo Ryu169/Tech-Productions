@@ -13,8 +13,7 @@ export default function Team() {
             Behind the Tech Productions
           </h2>
           <p className="mt-4 text-brand-600 leading-relaxed text-base md:text-lg">
-            Kami menggabungkan keahlian teknis dan kreativitas desain untuk
-            membangun produk digital yang bernilai tinggi.
+            Kami hadir dengan satu tujuan: memadukan keahlian teknis dan visi inovatif untuk membangun solusi digital untuk mempermudah laju bisnis Anda.
           </p>
         </div>
 
