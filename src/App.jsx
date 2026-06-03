@@ -8,6 +8,7 @@ import AdminDashboard from './pages/admin/AdminDashboard.jsx';
 import AdminCatalog from './pages/admin/AdminCatalog.jsx';
 import AdminProjects from './pages/admin/AdminProjects.jsx';
 import AdminTasks from './pages/admin/AdminTasks.jsx';
+import AdminPartners from './pages/admin/AdminPartners.jsx';
 
 function RequireAuth({ children }) {
   const { isAuthed } = useAdmin();
@@ -56,7 +57,7 @@ export default function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="catalog" element={<AdminCatalog />} />
             <Route path="projects" element={<AdminProjects />} />
-            <Route path="projects" element={<AdminProjects />} />
+            <Route path="partners" element={<AdminPartners />} />
             <Route path="tasks" element={<AdminTasks />} />
           </Route>
 

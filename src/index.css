@@ -58,6 +58,29 @@
   }
 }
 
+@keyframes marquee-loop-left {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.partner-marquee-track {
+  width: max-content;
+  animation: marquee-loop-left 50s linear infinite;
+  animation-delay: -20s;
+  animation-play-state: running;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee-track {
+    animation: none;
+  }
+}
+
 /* Hero fixed background — only on devices that support it well */
 .hero-bg {
   background-image:

@@ -1,18 +1,21 @@
+import rioPhoto from '../assets/rio.jpeg';
+import farganPhoto from '../assets/fargan.png';
+
 // Edit these values to customize the site for your business.
 export const siteConfig = {
   brand: {
     name: 'Tech Productions',
   },
   // Without leading "+" or spaces. Example: 6281234567890
-  whatsappNumber: '6281234567890',
+  whatsappNumber: '6282282563848',
   whatsappMessage:
     'Hallo Tech Productions, saya tertarik untuk berdiskusi tentang sebuah proyek.',
-  email: 'contact@tptech.id',
+  email: 'techproductions.dev@gmail.com',
   // Used by both the Contact card and the embedded map iframe.
   address: {
-    line1: 'Jakarta Digital District',
-    line2: 'Jalan Sudirman Kav. 25, Jakarta Selatan, DKI Jakarta 12930',
-    mapsQuery: 'Sudirman+Jakarta+Selatan',
+    line1: 'Tomang, Grogol Petamburan',
+    line2: 'Jl. Tj. Gedong 1 No.30, RT.2/RW.16, Tomang, Kec. Grogol Petamburan, Jakarta Barat, DKI Jakarta 11440',
+    mapsQuery: 'Jl+Tj+Gedong+1+No+27+Tomang+Grogol+Petamburan+Jakarta+Barat+DKI+Jakarta+11440',
   },
   social: {
     instagram: 'https://instagram.com/',
@@ -38,19 +41,19 @@ export const navLinks = [
 export const teamMembers = [
   {
     id: 'member-1',
-    name: 'Nama Anggota Pertama',
+    name: 'Rio',
     role: 'Co-Founder & Lead Developer',
     education: 'S1 Teknik Informatika, Universitas Contoh',
     experience: '5+ tahun pengalaman dalam pengembangan Full-Stack Web dan AI System. Mengkhususkan diri pada arsitektur scalable dan performa tinggi.',
-    image: 'https://ui-avatars.com/api/?name=Anggota+Pertama&background=0D8ABC&color=fff&size=256'
+    image: rioPhoto
   },
   {
     id: 'member-2',
-    name: 'Nama Anggota Kedua',
+    name: 'Fargan',
     role: 'Co-Founder & UI/UX Designer',
     education: 'S1 Sistem Informasi, Universitas Contoh',
     experience: '4+ tahun pengalaman dalam mendesain antarmuka pengguna (UI/UX) untuk berbagai produk digital yang intuitif dan berpusat pada pengguna.',
-    image: 'https://ui-avatars.com/api/?name=Anggota+Kedua&background=E11D48&color=fff&size=256'
+    image: farganPhoto
   }
 ];
 
@@ -161,6 +164,8 @@ export const seedProjects = [
     color: 'rose',
   },
 ];
+
+export const seedPartnerLogos = [];
 
 /**
  * Backward-compatible accessor — handles both old single-`image` and new

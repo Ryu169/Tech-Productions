@@ -3,6 +3,7 @@ import {
   Boxes,
   FolderKanban,
   ListTodo,
+  Handshake,
   ArrowRight,
   Calendar,
   AlertTriangle,
@@ -11,6 +12,7 @@ import {
 import { useLocalStorage } from '../../hooks/useLocalStorage.js';
 import {
   seedCatalog,
+  seedPartnerLogos,
   seedProjects,
   seedTasks,
   siteConfig,
@@ -19,6 +21,7 @@ import {
 export default function AdminDashboard() {
   const [catalog] = useLocalStorage('tp.catalog.v1', seedCatalog);
   const [projects] = useLocalStorage('tp.projects.v1', seedProjects);
+  const [partners] = useLocalStorage('tp.partners.v1', seedPartnerLogos);
   const [tasks] = useLocalStorage('tp.tasks.v1', seedTasks);
 
   const today = new Date();
@@ -48,6 +51,13 @@ export default function AdminDashboard() {
       color: 'from-sky-500 to-sky-600',
     },
     {
+      label: 'Mitra',
+      count: partners.length,
+      icon: Handshake,
+      to: '/admin/partners',
+      color: 'from-indigo-500 to-indigo-600',
+    },
+    {
       label: 'Tasks Aktif',
       count: tasks.filter((t) => t.status !== 'completed').length,
       icon: ListTodo,
@@ -75,7 +85,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stat cards */}
-      <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {cards.map((c) => (
           <Link
             key={c.label}

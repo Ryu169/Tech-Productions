@@ -5,6 +5,7 @@ import {
   Boxes,
   FolderKanban,
   ListTodo,
+  Handshake,
   LogOut,
   ExternalLink,
   Menu,
@@ -18,6 +19,7 @@ const items = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/admin/catalog', label: 'Catalog', icon: Boxes },
   { to: '/admin/projects', label: 'Projects', icon: FolderKanban },
+  { to: '/admin/partners', label: 'Mitra', icon: Handshake },
   { to: '/admin/tasks', label: 'Tasks', icon: ListTodo },
 ];
 

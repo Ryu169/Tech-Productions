@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { ImageIcon, ExternalLink, Layers, Images } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage.js';
-import { seedProjects, getProjectImages } from '../data/siteConfig.js';
+import {
+  seedProjects,
+  seedPartnerLogos,
+  getProjectImages,
+} from '../data/siteConfig.js';
 import Lightbox from './Lightbox.jsx';
 
 const TAG_COLOR = {
@@ -17,7 +21,9 @@ const TAG_COLOR = {
 
 export default function Projects() {
   const [items] = useLocalStorage('tp.projects.v1', seedProjects);
+  const [partners] = useLocalStorage('tp.partners.v1', seedPartnerLogos);
   const [box, setBox] = useState({ open: false, images: [], title: '', start: 0 });
+  const partnerLoopItems = Array.from({ length: 6 }, () => partners).flat();
 
   const openLightbox = (project, startIdx = 0) => {
     const imgs = getProjectImages(project);
@@ -32,7 +38,35 @@ export default function Projects() {
           <span className="inline-block text-accent font-semibold uppercase tracking-widest text-xs">
             Project
           </span>
-          <h2 className="section-title mt-2">Karya & Studi Kasus</h2>
+        </div>
+
+        {partners.length > 0 && (
+          <div className="mb-16">
+            <div className="mb-8">
+              <h3 className="section-title">Customers</h3>
+            </div>
+
+            <div className="partner-marquee overflow-hidden bg-transparent py-6">
+              <div className="partner-marquee-track flex items-center gap-7 pr-7">
+                {partnerLoopItems.map((partner, idx) => (
+                  <div
+                    key={`${partner.id}-${idx}`}
+                    className="flex h-[88px] min-w-[190px] items-center justify-center bg-transparent px-8"
+                  >
+                    <img
+                      src={partner.logo}
+                      alt={partner.name || 'Logo mitra'}
+                      className="max-h-18 w-auto max-w-[150px] object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mb-12">
+          <h2 className="section-title">Karya & Studi Kasus</h2>
           <p className="section-subtitle">
             Pilihan proyek yang telah kami kerjakan — dari aplikasi web,
             WebGIS, sistem AI, hingga media visual. Klik gambar untuk melihat
@@ -81,7 +115,6 @@ export default function Projects() {
                       </span>
                     )}
 
-                    {/* Gallery count badge */}
                     {hasGallery && (
                       <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-brand-950/70 text-white backdrop-blur-sm">
                         <Images size={12} />
@@ -89,7 +122,6 @@ export default function Projects() {
                       </span>
                     )}
 
-                    {/* Hover overlay hint */}
                     {imgs.length > 0 && (
                       <div className="absolute inset-0 bg-brand-950/0 group-hover:bg-brand-950/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <span className="px-3 py-1.5 rounded-full bg-white/95 text-brand-950 text-xs font-semibold shadow-lg">
