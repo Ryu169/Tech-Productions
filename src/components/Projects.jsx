@@ -49,16 +49,7 @@ export default function Projects() {
             <div className="partner-marquee overflow-hidden bg-transparent py-6">
               <div className="partner-marquee-track flex items-center gap-7 pr-7">
                 {partnerLoopItems.map((partner, idx) => (
-                  <div
-                    key={`${partner.id}-${idx}`}
-                    className="flex h-[88px] min-w-[190px] items-center justify-center bg-transparent px-8"
-                  >
-                    <img
-                      src={partner.logo}
-                      alt={partner.name || 'Logo mitra'}
-                      className="max-h-18 w-auto max-w-[150px] object-contain"
-                    />
-                  </div>
+                  <PartnerLogo key={`${partner.id}-${idx}`} partner={partner} />
                 ))}
               </div>
             </div>
@@ -181,5 +172,34 @@ export default function Projects() {
         startIndex={box.start}
       />
     </section>
+  );
+}
+
+function PartnerLogo({ partner }) {
+  const logo = (
+    <img
+      src={partner.logo}
+      alt={partner.name || 'Logo mitra'}
+      className="max-h-18 w-auto max-w-[150px] object-contain"
+    />
+  );
+
+  const className =
+    'flex h-[88px] min-w-[190px] items-center justify-center bg-transparent px-8';
+
+  if (!partner.url) {
+    return <div className={className}>{logo}</div>;
+  }
+
+  return (
+    <a
+      href={partner.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Buka website ${partner.name || 'mitra'}`}
+      className={className}
+    >
+      {logo}
+    </a>
   );
 }

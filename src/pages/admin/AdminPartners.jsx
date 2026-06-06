@@ -1,5 +1,13 @@
 import { useRef, useState } from 'react';
-import { Plus, Trash2, RotateCcw, UploadCloud, ImageIcon } from 'lucide-react';
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  RotateCcw,
+  UploadCloud,
+  ImageIcon,
+  ExternalLink,
+} from 'lucide-react';
 import { PageHeader } from './AdminCatalog.jsx';
 import Modal from '../../components/Modal.jsx';
 import { useLocalStorage } from '../../hooks/useLocalStorage.js';
@@ -14,6 +22,7 @@ const blank = {
   id: '',
   name: '',
   logo: '',
+  url: '',
 };
 
 export default function AdminPartners() {
@@ -21,12 +30,19 @@ export default function AdminPartners() {
     'tp.partners.v1',
     seedPartnerLogos
   );
-  const [modal, setModal] = useState({ open: false, draft: blank });
+  const [modal, setModal] = useState({ open: false, mode: 'create', draft: blank });
 
   const openCreate = () =>
     setModal({
       open: true,
+      mode: 'create',
       draft: { ...blank, id: `partner-${Date.now()}` },
+    });
+  const openEdit = (item) =>
+    setModal({
+      open: true,
+      mode: 'edit',
+      draft: { ...blank, ...item },
     });
 
   const close = () => setModal((m) => ({ ...m, open: false }));
@@ -34,7 +50,17 @@ export default function AdminPartners() {
   const save = () => {
     const draft = modal.draft;
     if (!draft.logo) return;
-    setItems((arr) => [draft, ...arr]);
+    const normalizedDraft = {
+      ...draft,
+      name: draft.name.trim(),
+      url: normalizeUrl(draft.url),
+    };
+    if (modal.mode === 'create') setItems((arr) => [normalizedDraft, ...arr]);
+    else {
+      setItems((arr) =>
+        arr.map((item) => (item.id === normalizedDraft.id ? normalizedDraft : item))
+      );
+    }
     close();
   };
 
@@ -108,13 +134,31 @@ export default function AdminPartners() {
                     {item.name || 'Tanpa nama'}
                   </div>
                   <div className="mt-0.5 text-xs text-brand-500">Logo mitra</div>
+                  {item.url && (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-accent hover:text-accent-dark"
+                    >
+                      Link aktif <ExternalLink size={11} />
+                    </a>
+                  )}
                 </div>
-                <button
-                  onClick={() => remove(item.id)}
-                  className="inline-flex items-center justify-center gap-1 rounded-lg bg-rose-50 px-2.5 py-1.5 text-xs font-medium text-rose-600 transition hover:bg-rose-100"
-                >
-                  <Trash2 size={12} />
-                </button>
+                <div className="flex gap-1.5">
+                  <button
+                    onClick={() => openEdit(item)}
+                    className="inline-flex items-center justify-center gap-1 rounded-lg bg-brand-100 px-2.5 py-1.5 text-xs font-medium text-brand-700 transition hover:bg-brand-200"
+                  >
+                    <Pencil size={12} />
+                  </button>
+                  <button
+                    onClick={() => remove(item.id)}
+                    className="inline-flex items-center justify-center gap-1 rounded-lg bg-rose-50 px-2.5 py-1.5 text-xs font-medium text-rose-600 transition hover:bg-rose-100"
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                </div>
               </div>
             </article>
           ))}
@@ -124,14 +168,14 @@ export default function AdminPartners() {
       <Modal
         open={modal.open}
         onClose={close}
-        title="Tambah Logo Mitra"
+        title={modal.mode === 'create' ? 'Tambah Logo Mitra' : 'Edit Logo Mitra'}
         footer={
           <>
             <button onClick={close} className="btn-ghost">
               Batal
             </button>
             <button onClick={save} className="btn-primary !px-5 !py-2 text-sm">
-              Simpan
+              {modal.mode === 'create' ? 'Tambahkan' : 'Simpan'}
             </button>
           </>
         }
@@ -143,6 +187,13 @@ export default function AdminPartners() {
       </Modal>
     </div>
   );
+}
+
+function normalizeUrl(value) {
+  const url = value.trim();
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;
+  return `https://${url}`;
 }
 
 function PartnerForm({ draft, setDraft }) {
@@ -186,6 +237,19 @@ function PartnerForm({ draft, setDraft }) {
           value={draft.name}
           onChange={(e) => update('name', e.target.value)}
         />
+      </div>
+
+      <div>
+        <label className="label">Link Logo (Opsional)</label>
+        <input
+          className="input"
+          placeholder="Contoh: https://namamitra.com"
+          value={draft.url}
+          onChange={(e) => update('url', e.target.value)}
+        />
+        <p className="mt-1.5 text-xs text-brand-500">
+          Kosongkan jika logo tidak perlu bisa diklik.
+        </p>
       </div>
 
       <div>
